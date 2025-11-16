@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blockchain Simulator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top-navbar">
+      <div class="logo">
+        <button id="tab-home-logo" class="logo-button">
+          BlockchainLabs
+        </button>
+      </div>
+      <nav class="nav-links">
+        <button id="tab-home" class="active">Home</button>
+        <button id="tab-hash">Hash</button>
+        <button id="tab-block">Block</button>
+        <button id="tab-chain">Block Chain</button>
+        <button id="tab-ecc">ECC Signature</button>
+        <button id="tab-consensus">Konsensus</button>
+        <button id="tab-aboutme">About Me</button>
+      </nav>
+      <div class="nav-controls">
+        <label class="theme-switch">
+          <input type="checkbox" id="theme-toggle-checkbox" />
+          <span class="slider">
+            <span class="icon-sun">☀️</span>
+            <span class="icon-moon">🌙</span>
+          </span>
+        </label>
+        <button id="menu-toggle">☰</button>
+      </div>
+    </header>
+    <div class="main-content">
+      <div id="page-home" class="page active">
+        <section class="hero-section">
+          <div class="hero-content">
+            <h1>Blockchain Simulator</h1>
+            <p>
+              Pelajari teknologi blockchain melalui simulasi interaktif. Dari
+              dasar hashing hingga konsensus jaringan, jelajahi cara kerja
+              blockchain yang aman dan terdesentralisasi.
+            </p>
+            <div class="hero-buttons-container">
+              <button
+                class="btn btn-primary-white"
+                onclick="document.getElementById('tab-hash').click()"
+              >
+                Mulai Simulasi
+              </button>
+              <button
+                class="btn btn-secondary"
+                onclick="document.getElementById('tab-aboutme').click()"
+              >
+                Tentang Saya
+              </button>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="bit.png" alt="Globe Map" />
+            <div class="glow-effect-orange"></div>
+            <div class="glow-effect-blue"></div>
+            <div class="glow-effect-yellow"></div>
+          </div>
+        </section>
+
+        <section class="content-card">
+          <h2>Modul Simulasi Interaktif</h2>
+          <p class="stack-description">
+            Simulator ini memungkinkan Anda untuk membangun pemahaman yang kuat
+            tentang blockchain melalui modul-modul yang dirancang khusus:
+          </p>
+          <div class="stack-cards-grid">
+            <div class="stack-card" onclick="showPage('page-hash')">
+              <div class="stack-card-header">
+                <span class="icon">+</span>
+                <h3>Hash</h3>
+              </div>
+              <p>
+                Pahami fondasi kriptografi SHA-256 dan bagaimana data diubah
+                menjadi 'sidik jari' digital yang unik.
+              </p>
+              <div class="card-tags">
+                <span class="tag">Kriptografi</span>
+                <span class="tag">SHA-256</span>
+              </div>
+            </div>
+            <div class="stack-card" onclick="showPage('page-block')">
+              <div class="stack-card-header">
+                <span class="icon">☐</span>
+                <h3>Block</h3>
+              </div>
+              <p>
+                Pelajari struktur dasar blok, termasuk data, nonce, dan
+                timestamp, serta proses mining.
+              </p>
+              <div class="card-tags">
+                <span class="tag">Struktur Data</span>
+                <span class="tag">Mining</span>
+              </div>
+            </div>
+            <div class="stack-card" onclick="showPage('page-chain')">
+              <div class="stack-card-header">
+                <span class="icon">🔗</span>
+                <h3>Block Chain</h3>
+              </div>
+              <p>
+                Rangkai beberapa blok secara berurutan, pahami bagaimana hash
+                dari blok sebelumnya mengamankan rantai.
+              </p>
+              <div class="card-tags">
+                <span class="tag">Immutability</span>
+                <span class="tag">Distributed Ledger</span>
+              </div>
+            </div>
+            <div class="stack-card" onclick="showPage('page-ecc')">
+              <div class="stack-card-header">
+                <span class="icon">✍️</span>
+                <h3>ECC Signature</h3>
+              </div>
+              <p>
+                Simulasikan tanda tangan digital menggunakan Public Key
+                Cryptography (ECC) untuk verifikasi otentikasi.
+              </p>
+              <div class="card-tags">
+                <span class="tag">Keamanan</span>
+                <span class="tag">Kunci Publik</span>
+              </div>
+            </div>
+            <div class="stack-card" onclick="showPage('page-consensus')">
+              <div class="stack-card-header">
+                <span class="icon">🤝</span>
+                <h3>Konsensus</h3>
+              </div>
+              <p>
+                Jelajahi bagaimana jaringan terdesentralisasi mencapai
+                kesepakatan melalui mekanisme konsensus seperti Proof-of-Work.
+              </p>
+              <div class="card-tags">
+                <span class="tag">Proof-of-Work</span>
+                <span class="tag">Desentralisasi</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-card">
+          <h2>Petunjuk Pengguna</h2>
+          <p>
+            Simulator ini dirancang untuk membantu Anda menguasai fondasi utama teknologi blockchain. Untuk memaksimalkan pengalaman belajar:
+          </p>
+          <ol>
+            <li>
+              Navigasika setiap fitur melalui <strong>Menu Bar</strong> pada Navbar atau
+              <strong>Kartu Modul</strong> di atas untuk berpindah halaman.
+            </li>
+            <li>
+              Ikuti alurnya secara bertahap—mulai dari Hash, Block, Block Chain, ECC Signature, hingga Konsensus—agar pemahaman Anda terbentuk secara menyeluruh.
+            </li>
+            <li>
+              Eksplorasi bebas sangat dianjurkan. Ubah data, coba berbagai skenario, dan amati bagaimana setiap komponen saling memengaruhi.
+            </li>
+          </ol>
+        </section>
+
+        <section class="content-card">
+          <h2>Apa Sebenarnya Teknologi Blockchain itu?</h2>
+          <p>
+            <strong>Blockchain</strong> adalah buku besar digital yang terdesentralisasi dan aman, berfungsi untuk menyimpan data transaksi dalam jaringan peer-to-peer tanpa perlu pihak ketiga (seperti bank). Keamanannya bergantung pada beberapa pilar kriptografi:
+          </p>
+          <p>
+            <strong>Blockchain</strong> berawal dari penelitian Haber dan Stornetta pada 1991 yang 
+            memperkenalkan penggunaan rantai hash untuk melindungi dokumen digital. 
+            Konsep ini berkembang hingga akhirnya pada 2008 Satoshi Nakamoto memperkenalkan Bitcoin, 
+            yang memanfaatkan blockchain sebagai buku besar terdesentralisasi untuk mencatat 
+            transaksi tanpa lembaga perantara. Sejak implementasi pertamanya pada 2009, teknologi 
+            ini digunakan luas karena mampu menjaga integritas data secara aman dan transparan.
+          </p>
+          <p><strong>Prinsip-Prinsip Blockchain:</strong></p>
+          <ul>
+            <li>
+              <strong>Desentralisasi</strong>–Data disimpan di banyak node sehingga tidak bergantung pada satu pihak.
+            </li>
+            <li>
+              <strong>Kriptografi Hash</strong>– Blok saling terhubung melalui hash unik yang menjaga integritas data.
+            </li>
+            <li>
+              <strong>Immutability</strong>– Data yang sudah divalidasi tidak dapat diubah atau dihapus.
+            </li>
+            <li>
+              <strong>Konsensus</strong>– Jaringan menggunakan mekanisme tertentu—seperti Proof of Work atau Proof of Stake—untuk memastikan semua node sepakat bahwa blok baru valid.
+            </li>
+            <li>
+                <strong>Transparansi</strong>– Riwayat transaksi dapat dilihat oleh seluruh peserta jaringan. Menggunakan Tanda Tangan Digital (ECC) mengotorisasi transaksi menggunakan kunci privat dan publik.
+            </li>
+        </section>
+      </div>
+
+      <div id="page-hash" class="page">
+        <div class="simulator-card">
+          <h2>Hash Generator</h2>
+          <label for="hash-input">Text Input:</label>
+          <textarea id="hash-input" rows="4"></textarea>
+          <label>SHA-256 Hash:</label>
+          <div id="hash-output" class="output"></div>
+        </div>
+      </div>
+
+      <div id="page-block" class="page">
+        <div class="simulator-card">
+          <h2>Single Block</h2>
+          <label for="block-number"># (Nomor Block):</label>
+          <input id="block-number" type="number" min="0" value="0" />
+
+          <label for="block-data">Data:</label>
+          <textarea id="block-data" rows="4"></textarea>
+
+          <label for="block-nonce">Nonce:</label>
+          <input id="block-nonce" type="text" maxlength="9" />
+
+          <label for="speed-control">Kecepatan Mining:</label>
+          <select id="speed-control">
+            <option value="1">Normal</option>
+            <option value="10">10x Lebih Cepat</option>
+            <option value="50">50x Lebih Cepat</option>
+          </select>
+
+          <button id="btn-mine" class="btn btn-primary">Mine</button>
+
+          <div id="mining-status" class="status"></div>
+          <label for="block-timestamp">Timestamp:</label>
+          <input id="block-timestamp" type="text" readonly />
+
+          <label>Hash:</label>
+          <div id="block-hash" class="output"></div>
+        </div>
+      </div>
+
+      <div id="page-chain" class="page">
+        <div class="simulator-card">
+          <h2>Blockchain</h2>
+          <div id="blockchain" class="chain-container"></div>
+          <div class="chain-controls">
+            <button id="btn-add-block" class="btn btn-primary">
+              Add Block
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="page-ecc" class="page">
+        <div class="simulator-card">
+          <h2>Verifikasi ECC Digital Signature</h2>
+
+          <button id="btn-generate-key" class="btn btn-secondary">
+            Generate Key Pair
+          </button>
+          <p>Public Key dan Private Key dapat diedit untuk percobaan.</p>
+
+          <label>Public Key:</label>
+          <textarea id="ecc-public" rows="3"></textarea>
+
+          <label>Private Key:</label>
+          <textarea id="ecc-private" rows="3"></textarea>
+
+          <hr />
+          <label>Pesan yang akan ditandatangani:</label>
+          <textarea id="ecc-message" rows="3"></textarea>
+
+          <button id="btn-sign" class="btn btn-primary">Sign Message</button>
+          <label>Hasil Signature (DER hex):</label>
+          <textarea id="ecc-signature" rows="3" readonly></textarea>
+
+          <hr />
+          <button id="btn-verify" class="btn btn-secondary">
+            Verify Signature
+          </button>
+          <div id="ecc-verify-result" class="output"></div>
+        </div>
+      </div>
+
+      <div id="page-consensus" class="page">
+        <div class="simulator-card">
+          <h2>Simulasi Konsensus</h2>
+
+          <div class="wallets">
+            <div class="wallet" data-user="A">
+              <h3>User A</h3>
+              <div>Saldo: <span id="saldo-A">100</span></div>
+              <label>Penerima:</label>
+              <select id="receiver-A">
+                <option value="B">User B</option>
+                <option value="C">User C</option>
+              </select>
+              <label>Jumlah:</label>
+              <input id="amount-A" type="number" min="1" value="10" />
+              <button id="send-A" class="btn btn-primary">Kirim</button>
+            </div>
+
+            <div class="wallet" data-user="B">
+              <h3>User B</h3>
+              <div>Saldo: <span id="saldo-B">100</span></div>
+              <label>Penerima:</label>
+              <select id="receiver-B">
+                <option value="A">User A</option>
+                <option value="C">User C</option>
+              </select>
+              <label>Jumlah:</label>
+              <input id="amount-B" type="number" min="1" value="10" />
+              <button id="send-B" class="btn btn-primary">Kirim</button>
+            </div>
+
+            <div class="wallet" data-user="C">
+              <h3>User C</h3>
+              <div>Saldo: <span id="saldo-C">100</span></div>
+              <label>Penerima:</label>
+              <select id="receiver-C">
+                <option value="A">User A</option>
+                <option value="B">User B</option>
+              </select>
+              <label>Jumlah:</label>
+              <input id="amount-C" type="number" min="1" value="10" />
+              <button id="send-C" class="btn btn-primary">Kirim</button>
+            </div>
+          </div>
+
+          <div style="margin-top: 12px">
+            <label>Mempool (pending transactions):</label>
+            <textarea
+              id="mempool"
+              rows="3"
+              placeholder="Setiap transaksi di baris baru. Contoh: A -> B:10"
+            ></textarea>
+          </div>
+
+          <div class="button-group" style="margin-top: 12px">
+            <button id="btn-mine-all" class="btn btn-accent">
+              Mine Semua Transaksi
+            </button>
+            <button id="btn-verify-consensus" class="btn btn-secondary">
+              Verify
+            </button>
+            <button id="btn-consensus" class="btn btn-accent">Consensus</button>
+          </div>
+        </div>
+
+        <div class="simulator-card">
+          <h3 style="margin-top: 0">Blockchain Tiap User</h3>
+          <div id="chains">
+            <h4>Database User A</h4>
+            <div id="chain-A" class="chain-row"></div>
+            <h4>Database User B</h4>
+            <div id="chain-B" class="chain-row"></div>
+            <h4>Database User C</h4>
+            <div id="chain-C" class="chain-row"></div>
+          </div>
+        </div>
+      </div>
+
+<div id="page-aboutme" class="page">
+  <div class="simulator-card">
+    <div class="profile-container">
+      <img
+        src="tsania.jpg"
+        alt="Profile Picture"
+        class="profile-pic"
+        width="150"
+        height="150"
+      />
+
+      <h3>Tsania Zahira Soffa</h3>
+      <p class="subtitle">
+        Mahasiswa Semester 5 Teknologi Rekayasa Multimedia | Politeknik
+        Elektronika Negeri Surabaya
+      </p>
+
+      <p>
+        Halo! Saya adalah mahasiswa yang bersemangat mengembangkan solusi
+        kreatif berbasis teknologi untuk komunikasi visual dan interaksi
+        digital. Simulator blockchain ini merupakan salah satu bentuk minat saya
+        dalam menerjemahkan teknologi kompleks menjadi visualisasi interaktif.
+      </p>
+
+      <p>
+        Baru-baru ini, saya fokus pada pengembangan karya interaktif. Sebagai
+        Visual Designer untuk proyek Ekvimp, saya merancang animasi interaktif
+        dan antarmuka pengguna yang intuitif untuk meningkatkan pengalaman
+        bermain. Proyek tersebut berhasil meraih posisi juara dalam kompetisi.
+      </p>
+
+      <p>
+        Selain desain interaktif, saya juga memiliki pengalaman dalam strategi
+        bisnis dan riset pasar, di mana tim saya berhasil meraih
+        juara dalam kompetisi tingkat nasional.
+      </p>
+
+      <!-- EDUCATION -->
+      <h4 class="profile-section-title">Education</h4>
+      <div class="profile-item">
+        <h5>ELECTRONICS ENGINEERING POLYTECHNIC INSTITUTE OF SURABAYA</h5>
+        <p class="item-meta">Surabaya, East Java | 2023 – NOW</p>
+      </div>
+      <div class="profile-item">
+        <h5>INTERNATIONAL STANDARD SCHOOL OF AMANATUL UMMAH</h5>
+        <p class="item-meta">Pacet, Mojokerto, East Java | 2020 – 2023</p>
+      </div>
+
+      <!-- SKILLS -->
+      <h4 class="profile-section-title">Skills</h4>
+      <div class="profile-skills-grid">
+        <span class="skill-tag">Programming</span>
+        <span class="skill-tag">UI/UX Design</span>
+        <span class="skill-tag">Teamwork & Collaboration</span>
+        <span class="skill-tag">Digital Design</span>
+        <span class="skill-tag">IoT System Development</span>
+        <span class="skill-tag">Adaptability</span>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <h4 class="profile-section-title">Experience</h4>
+
+      <div class="profile-item">
+        <h5>Educational VR Development Research - Program & 3D Layout</h5>
+        <p class="item-meta">2025 – NOW</p>
+        <ul>
+          <li>Mengembangkan proyek riset Virtual Reality (VR) untuk simulasi pembelajaran.</li>
+          <li>Bertanggung jawab pada pemrograman, penataan lingkungan 3D, dan integrasi sistem interaktif di Unity.</li>
+          <li>Merancang lingkungan 3D termasuk area panggung, penonton, dan ruang kontrol.</li>
+          <li>Mengimplementasikan interaksi berbasis XR Device Simulator untuk meningkatkan imersi pengguna.</li>
+        </ul>
+      </div>
+
+      <div class="profile-item">
+        <h5>Bhamantara EEPISAT - Internal Division</h5>
+        <p class="item-meta">2024 – NOW</p>
+        <ul>
+          <li>Berperan aktif dalam divisi internal, mendukung koordinasi dan operasional tim riset kedirgantaraan PENS.</li>
+          <li>Mendukung integrasi perangkat keras, pengujian sistem, dan validasi prototipe untuk kompetisi CanSat.</li>
+          <li>Berpartisipasi dalam manajemen tim, koordinasi internal, dan persiapan kompetisi.</li>
+        </ul>
+      </div>
+
+      <div class="profile-item">
+        <h5>Project Bee Creativity Station - Program & Designer</h5>
+        <p class="item-meta">2024</p>
+        <ul>
+          <li>Berpartisipasi dalam program kolaborasi internasional Creativity Station 2024 mengenai Engineering Service Learning dan Sustainable Technology.</li>
+          <li>Bertanggung jawab pada pemrograman dan desain UI/UX untuk solusi inovatif proyek.</li>
+          <li>Berkolaborasi dengan peserta internasional dari Korea dan Indonesia di bawah bimbingan Pusan National University.</li>
+          <li>Merancang antarmuka sistem dan visualisasi alur kerja proyek.</li>
+        </ul>
+      </div>
+
+      <a
+        href="https://www.figma.com/proto/TxmxWtJ5xZE9jkWR20x5sa/Portofolio-Prototype?node-id=61-483&t=5hipGRJtEs2ju44R-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=61%3A372"
+        target="_blank"
+        class="btn btn-primary"
+      >
+        Lihat Portofolio Saya
+      </a>
+        <!-- Google Maps -->
+        <div class="profile-map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.692178166746!2d112.7911825751048!3d-7.27582429273125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fa10ea2ae883%3A0xbe22c55d60ef09c7!2sPoliteknik%20Elektronika%20Negeri%20Surabaya!5e0!3m2!1sid!2sid!4v1763305695899!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+     </div>
+    </div>
+  </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="pens.png" alt="Logo PENS" />
+          <img src="trm.png" alt="Logo TRM" />
+        </div>
+        <div class="footer-contact">
+          <p>Contact Me (Sosial Media):</p>
+          <a
+            href="https://www.instagram.com/sanniii_72/"
+            target="_blank"
+            >Instagram</a
+          >
+          |
+          <a href="https://x.com/tezet172" target="_blank">Twitter/X</a>
+          |
+          <a
+            href="https://www.linkedin.com/in/tsania24"
+            target="_blank"
+            >LinkedIn</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/elliptic/6.5.4/elliptic.min.js"></script>
+    <script src="app.js"></script>
+
+    <script>
+      // Memicu tombol 'tab-home' asli saat logo diklik
+      document
+        .getElementById("tab-home-logo")
+        .addEventListener("click", function () {
+          document.getElementById("tab-home").click();
+        });
+
+      // Mengatur buka/tup menu mobile
+      document
+        .getElementById("menu-toggle")
+        .addEventListener("click", function () {
+          document.querySelector(".nav-links").classList.toggle("open");
+        });
+
+      // Menutup menu mobile setelah salah satu tombol nav diklik
+      document.querySelectorAll(".nav-links button").forEach((button) => {
+        button.addEventListener("click", () => {
+          document.querySelector(".nav-links").classList.remove("open");
+        });
+      });
+
+      // ===================================
+      // BARU: LOGIKA THEME TOGGLE
+      // ===================================
+      const themeToggle = document.getElementById("theme-toggle-checkbox");
+      const currentTheme = localStorage.getItem("theme");
+
+      function setAppTheme(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+        if (theme === "dark") {
+          themeToggle.checked = true;
+        } else {
+          themeToggle.checked = false;
+        }
+      }
+
+      // Cek tema yang tersimpan di localStorage saat load
+      if (currentTheme) {
+        setAppTheme(currentTheme);
+      } else {
+        // Default ke dark mode jika tidak ada setting
+        setAppTheme("dark");
+      }
+
+      // Listener untuk toggle
+      themeToggle.addEventListener("change", function () {
+        if (this.checked) {
+          setAppTheme("dark");
+          localStorage.setItem("theme", "dark");
+        } else {
+          setAppTheme("light");
+          localStorage.setItem("theme", "light");
+        }
+      });
+    </script>
+  </body>
+</html>

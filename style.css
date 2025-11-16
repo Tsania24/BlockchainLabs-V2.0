@@ -1,0 +1,1053 @@
+/* ================================== */
+/* ====== 1. VARIABEL & GLOBAL ====== */
+/* ================================== */
+
+/* Mode Terang (Default) */
+:root {
+  --font-primary: "Poppins", sans-serif;
+  --font-code: "Roboto Mono", monospace;
+
+  --bg-primary: #f4f7f9;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #eef2f5;
+  --bg-hover: #f0f0f0;
+  --bg-navbar: rgba(255, 255, 255, 0.7);
+
+  --border-primary: #e0e4e8;
+  --border-secondary: #d1d8de;
+
+  --text-primary: #111827;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
+
+  --accent-blue: #007aff;
+  --accent-blue-faded: rgba(0, 122, 255, 0.2);
+  --accent-yellow: #ff9500;
+  --accent-yellow-faded: rgba(255, 149, 0, 0.3);
+  --accent-red: #dc2626;
+
+  --text-on-accent-blue: #ffffff;
+  --text-on-accent-yellow: #000000;
+
+  --shadow-small: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Mode Gelap (BARU DENGAN GAYA WEB 3) */
+[data-theme="dark"] {
+  --bg-primary: #000000;
+  --bg-secondary: #111111;
+  --bg-tertiary: #1a1a1a;
+  --bg-hover: #222222;
+  --bg-navbar: rgba(0, 0, 0, 0.5);
+
+  --border-primary: #333333;
+  --border-secondary: #444444;
+
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #a0a0a0;
+
+  /* --- PERUBAHAN WARNA AKAN DI SINI --- */
+  --accent-blue: #c056ff; /* Diubah dari biru muda ke ungu */
+  --accent-blue-faded: rgba(192, 86, 255, 0.2);
+  --accent-cyan: #00f2ff; /* Aksen baru untuk glow */
+  --accent-cyan-faded: rgba(0, 242, 255, 0.2);
+  --accent-yellow: #f0b90b;
+  --accent-yellow-faded: rgba(240, 185, 11, 0.3);
+  --accent-red: #ef4444;
+
+  --text-on-accent-blue: #ffffff; /* Teks di atas ungu tetap putih */
+  --text-on-accent-yellow: #000000;
+
+  --shadow-small: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+    0 4px 6px -2px rgba(0, 0, 0, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-primary);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* BARU: Gradien Latar Belakang untuk Dark Mode */
+[data-theme="dark"] body {
+  /* Gradien subtil sebagai latar belakang untuk efek glassmorphism */
+  background: radial-gradient(
+      circle at 100% 0%,
+      rgba(192, 86, 255, 0.15), /* Glow ungu di kanan atas */
+      #000000 35%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(240, 185, 11, 0.1), /* Glow kuning di kiri bawah */
+      #000000 40%
+    );
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border-primary);
+  margin: 20px 0;
+}
+
+a {
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* ================================== */
+/* ====== 2. NAVBAR & KONTROL ====== */
+/* ================================== */
+.top-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  /* Efek Glassmorphism */
+  background: var(--bg-navbar);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-primary);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.logo .logo-button {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font-primary);
+}
+
+.nav-links {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-links button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-primary);
+  font-size: 0.95em;
+  font-weight: 500;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.nav-links button:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+.nav-links button.active {
+  color: var(--text-primary);
+  background: none;
+}
+
+.nav-links button.active:hover {
+  background: var(--bg-hover); /* Paksa background muncul lagi saat di-hover */
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Style untuk Theme Toggle Switch */
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-secondary);
+  transition: 0.4s;
+  border-radius: 26px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-secondary);
+  transition: 0.4s;
+  border-radius: 50%;
+}
+.slider .icon-sun,
+.slider .icon-moon {
+  position: absolute;
+  font-size: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.slider .icon-sun {
+  left: 5px;
+  opacity: 0;
+}
+.slider .icon-moon {
+  right: 5px;
+  opacity: 1;
+}
+
+input:checked + .slider {
+  background-color: var(--bg-tertiary);
+}
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+input:checked + .slider .icon-sun {
+  opacity: 1;
+}
+input:checked + .slider .icon-moon {
+  opacity: 0;
+}
+
+/* ================================== */
+/* ====== 3. KONTEN UTAMA & HALAMAN === */
+/* ================================== */
+.main-content {
+  padding: 20px;
+  padding-top: 90px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page {
+  display: none;
+}
+.page.active {
+  display: block;
+}
+
+/* KARTU KONTEN BARU (Petunjuk, Teori, dll) */
+.content-card {
+  padding: 40px;
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  margin-bottom: 40px;
+  box-shadow: var(--shadow-medium);
+  transition: all 0.3s ease;
+}
+.content-card h2 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+}
+.content-card p,
+.content-card li {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  text-align: justify;
+}
+.content-card ul,
+.content-card ol {
+  padding-left: 20px;
+}
+.content-card strong {
+  color: var(--accent-yellow);
+}
+.content-card em {
+  color: var(--accent-blue);
+  font-style: normal;
+}
+
+/* KARTU KONTEN UNTUK SIMULATOR (Hash, Block, dll) */
+.simulator-card {
+  background: var(--bg-secondary);
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: var(--shadow-medium);
+  border: 1px solid var(--border-primary);
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+}
+.simulator-card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* ================================== */
+/* ====== 4. TOMBOL (UNIFIED) ====== */
+/* ================================== */
+
+/* Style Tombol Baru yang Terpadu */
+.btn {
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+  margin-top: 10px; /* Jarak default */
+  text-align: center;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-medium);
+}
+
+/* Tombol Aksi Utama (Biru/Aksen) */
+.btn-primary {
+  background: var(--accent-blue);
+  color: var(--text-on-accent-blue);
+}
+.btn-primary:hover {
+  box-shadow: 0 7px 20px var(--accent-blue-faded);
+}
+
+/* Tombol Aksi Putih (Khusus Hero) */
+.btn-primary-white {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+}
+.btn-primary-white:hover {
+  background: #cccccc;
+  border-color: #cccccc;
+  box-shadow: 0 7px 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Tombol Sekunder (Netral) */
+.btn-secondary {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-secondary);
+}
+.btn-secondary:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-primary);
+}
+
+/* Tombol Aksen (Kuning/Penting) */
+.btn-accent {
+  background: var(--accent-yellow);
+  color: var(--text-on-accent-yellow);
+}
+.btn-accent:hover {
+  box-shadow: 0 7px 20px var(--accent-yellow-faded);
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.button-group .btn {
+  margin-top: 0;
+}
+
+/* ================================== */
+/* ====== 5. FORM & OUTPUT ====== */
+/* ================================== */
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+textarea,
+input[type="text"],
+input[type="number"],
+select,
+.output {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  font-family: var(--font-code);
+  font-size: 11.8px;
+  border: 1px solid var(--border-secondary);
+  border-radius: 6px;
+  background: var(--bg-tertiary);
+  transition: all 0.2s ease;
+  color: var(--text-primary);
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px var(--accent-blue-faded);
+  outline: none;
+  background: var(--bg-secondary);
+}
+
+.output {
+  min-height: 40px;
+  background: var(--bg-primary); /* Beda dari input */
+  color: var(--text-secondary);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+#ecc-verify-result {
+  min-height: 40px;
+  padding: 10px;
+}
+#ecc-verify-result.valid {
+  background-color: rgba(22, 163, 74, 0.1);
+  color: #16a34a;
+  border: 1px solid #16a34a;
+}
+#ecc-verify-result.invalid {
+  background-color: rgba(220, 38, 38, 0.1);
+  color: var(--accent-red);
+  border: 1px solid var(--accent-red);
+}
+
+/* ================================== */
+/* ====== 6. HALAMAN SPESIFIK ====== */
+/* ================================== */
+
+/* --- Halaman Home (BARU DENGAN GLASSMORPHISM) --- */
+#page-home h1 {
+  font-size: 3.5rem;
+  line-height: 1.2;
+  margin: 0 0 20px 0;
+}
+#page-home p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0 0 30px 0;
+  text-align: left; /* Override */
+}
+
+/* BARU: Hero Section Glassmorphism */
+#page-home .hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 60px 40px;
+  border-radius: 12px; /* Sedikit lebih bulat */
+
+  /* --- EFEK GLASSMORPHISM --- */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05), /* Sedikit kilau */
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(163, 161, 161, 0.1); /* Border kaca */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Shadow lebih kuat */
+  /* -------------------------- */
+
+  margin-bottom: 40px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.hero-content {
+  flex: 1;
+  max-width: 600px;
+  z-index: 2;
+}
+.hero-buttons-container {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.hero-buttons-container .btn {
+  margin-top: 0;
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 400px;
+  min-height: 300px;
+  z-index: 1;
+}
+
+/* BARU: Gambar Hero lebih subtil */
+.hero-image img {
+  width: 100%;
+  opacity: 0.2; /* Dibuat lebih subtil */
+  position: relative;
+  z-index: 1;
+  filter: grayscale(30%); /* Sedikit desaturasi */
+}
+
+/* BARU: Efek Glow yang Diperbesar dan Dianimasikan */
+.glow-effect-orange,
+.glow-effect-blue,
+.glow-effect-yellow {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.7;
+  filter: blur(100px); /* Blur lebih besar */
+  z-index: 0;
+  transition: all 0.3s ease;
+  /* Animasi denyut yang subtil */
+  animation: subtle-glow-pulse 10s alternate infinite ease-in-out;
+}
+
+.glow-effect-orange {
+  width: 300px;
+  height: 300px;
+  background: var(--accent-blue); /* Menggunakan warna ungu baru */
+  top: 10%;
+  left: 20%;
+}
+
+.glow-effect-blue {
+  width: 250px;
+  height: 250px;
+  background: var(--accent-yellow); /* Menggunakan warna kuning */
+  top: 30%;
+  left: 50%;
+  animation-delay: -3s; /* Delay animasi agar tidak sinkron */
+}
+
+.glow-effect-yellow {
+  width: 280px;
+  height: 280px;
+  background: var(--accent-cyan); /* Menggunakan warna cyan baru */
+  top: 50%;
+  left: 30%;
+  opacity: 0.5;
+  animation-delay: -6s; /* Delay animasi agar tidak sinkron */
+}
+
+/* Bagian Stack Card (Modul) */
+.stack-description {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 800px;
+  margin-bottom: 40px;
+}
+
+.stack-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* BARU: Stack Card Glassmorphism */
+.stack-card {
+  /* --- EFEK GLASSMORPHISM --- */
+  background: rgba(181, 179, 179, 0.4); /* --bg-tertiary dengan transparansi */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(205, 145, 145, 0.1); /* Border kaca */
+  /* -------------------------- */
+
+  border-radius: 8px;
+  padding: 25px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+/* BARU: Efek Hover Stack Card */
+.stack-card:hover {
+  transform: translateY(-8px); /* Angkat lebih tinggi */
+  border-color: rgba(255, 255, 255, 0.25); /* Border lebih cerah */
+  background: rgba(143, 141, 141, 0.7); /* Background lebih solid */
+  box-shadow: var(--shadow-large);
+}
+
+.stack-card-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+.stack-card-header .icon {
+  font-size: 1.2rem;
+  color: var(--accent-yellow);
+  font-weight: 600;
+}
+.stack-card-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.stack-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  flex-grow: 1;
+  margin-bottom: 20px;
+  text-align: left; /* Override */
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* BARU: Tag dengan warna aksen baru */
+.tag {
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent-blue); /* Menggunakan warna ungu baru */
+  background: var(--accent-blue-faded); /* Background ungu transparan */
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* --- Halaman Chain & Consensus --- */
+.chain-container {
+  white-space: nowrap;
+  overflow-x: auto;
+  padding: 10px;
+  background: var(--bg-primary);
+  border-radius: 8px;
+  border: 1px solid var(--border-primary);
+}
+
+.blockchain-block {
+  display: inline-block;
+  vertical-align: top;
+  width: 280px;
+  min-width: 280px;
+  padding: 15px;
+  margin: 5px;
+  border-radius: 8px;
+  background-color: var(--bg-secondary);
+  box-sizing: border-box;
+  box-shadow: var(--shadow-small);
+  border: 1px solid var(--border-primary);
+}
+.blockchain-block:first-child {
+  margin-left: 5px;
+}
+.blockchain-block .btn {
+  display: block;
+  width: 100%;
+}
+.blockchain-block textarea {
+  font-size: 12px;
+}
+
+.wallets {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.wallet {
+  border: 1px solid var(--border-primary);
+  padding: 15px;
+  flex: 1;
+  min-width: 250px;
+  border-radius: 8px;
+  background-color: var(--bg-secondary);
+}
+.wallet .btn {
+  width: 100%;
+}
+
+.chain-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  overflow-x: auto;
+  padding: 10px;
+  background: var(--bg-tertiary);
+  border-radius: 6px;
+}
+.chain-block {
+  border: 1px solid var(--border-primary);
+  padding: 10px;
+  border-radius: 5px;
+  min-width: 220px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-family: var(--font-code);
+  font-size: 12px;
+  word-break: break-all;
+}
+.chain-block.invalid {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: var(--accent-red);
+}
+
+/* --- Halaman About Me --- */
+.profile-container {
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto;
+}
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: var(--bg-tertiary);
+  border: 5px solid var(--accent-blue);
+  box-shadow: var(--shadow-medium);
+  margin-bottom: 15px;
+}
+.profile-container h3 {
+  margin: 10px 0 5px 0;
+  font-size: 1.8em;
+}
+.profile-container .subtitle {
+  font-size: 1.1em;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 0;
+  text-align: center;
+}
+.profile-container p {
+  font-size: 1em;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  text-align: justify;
+}
+.profile-container .btn {
+  margin-top: 20px;
+}
+
+/* ================================== */
+/* ====== 7. FOOTER ====== */
+/* ================================== */
+.footer {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  padding: 30px;
+  margin-top: 40px;
+  text-align: center;
+  border-top: 1px solid var(--border-primary);
+  transition: all 0.3s ease;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 10px;
+}
+.footer-logo img {
+  height: 60px;
+  width: auto;
+  /* Filter untuk mode gelap/terang */
+  filter: var(--text-primary) invert(0.8) opacity(0.8);
+}
+[data-theme="light"] .footer-logo img {
+  filter: none;
+  opacity: 0.8;
+}
+
+.footer-contact {
+  margin: 10px;
+}
+.footer-contact p {
+  margin: 0 0 10px 0;
+}
+.footer-contact a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  margin: 0 5px;
+  font-weight: 500;
+}
+.footer-contact a:hover {
+  text-decoration: underline;
+}
+
+/* ================================== */
+/* == TAMBAHAN UNTUK CV 'ABOUT ME' == */
+/* ================================== */
+
+/* Judul Section (Education, Skills, Experience) */
+.profile-section-title {
+  text-align: left;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 35px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent-blue);
+  display: inline-block;
+}
+
+/* Kontainer untuk setiap item */
+.profile-item {
+  text-align: left;
+  margin-bottom: 25px;
+}
+
+.profile-item h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 5px 0;
+}
+
+.profile-item .item-meta {
+  font-family: var(--font-code);
+  font-size: 0.9rem;
+  color: var(--accent-yellow);
+  margin: 0 0 10px 0;
+  text-align: left;
+}
+
+.profile-item ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.profile-item li {
+  text-align: left;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+/* Grid untuk Skills */
+.profile-skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.skill-tag {
+  font-family: var(--font-code);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--accent-blue);
+  background: var(--accent-blue-faded);
+  border-radius: 6px;
+  border: 1px solid var(--accent-blue);
+  padding: 6px 10px;
+}
+
+/* ================================== */
+/* ======== STYLE UNTUK MAPS ======== */
+/* ================================== */
+
+.profile-map-container {
+  margin-top: 35px;
+  margin-bottom: 25px;
+  width: 100%;
+  max-width: 700px;   /* agar tidak terlalu melebar di layar besar */
+  height: 450px;      /* ukuran kotak besar */
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid var(--border-primary);
+  box-shadow: var(--shadow-small);
+  margin-left: auto;
+  margin-right: auto; /* posisi tengah */
+}
+
+.profile-map-container iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: none;
+}
+
+
+/* ================================== */
+/* ====== 8. RESPONSIVE (MOBILE) ====== */
+/* ================================== */
+@media (max-width: 800px) {
+  .top-navbar {
+    padding: 15px 20px;
+  }
+
+  #menu-toggle {
+    display: block;
+    z-index: 1002;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg-primary);
+    padding-top: 80px;
+    align-items: center;
+    z-index: 1001;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links button {
+    font-size: 1.5em;
+    padding: 15px 0;
+    width: 80%;
+    text-align: center;
+  }
+
+  .main-content {
+    padding: 15px;
+    padding-top: 80px;
+  }
+
+  /* Halaman Simulator di mobile */
+  .simulator-card {
+    padding: 15px;
+  }
+
+  /* Halaman Home di mobile */
+  #page-home .hero-section {
+    flex-direction: column;
+    padding: 30px 20px;
+    text-align: center;
+  }
+  #page-home h1 {
+    font-size: 2.5rem;
+  }
+  .hero-content {
+    max-width: 100%;
+  }
+  .hero-buttons-container {
+    flex-direction: column;
+  }
+  .hero-image {
+    max-width: 300px;
+    min-height: 200px;
+    margin-top: 20px;
+  }
+
+  .content-card {
+    padding: 20px;
+  }
+  .content-card h2 {
+    font-size: 2rem;
+  }
+
+  /* Teks rata kiri di mobile */
+  .profile-container p,
+  .content-card p,
+  .content-card li {
+    text-align: left;
+  }
+
+  .wallets {
+    flex-direction: column;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .chain-container,
+  .chain-row {
+    white-space: normal;
+  }
+  .blockchain-block {
+    display: block;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 15px;
+  }
+}
+
+/* BARU: Keyframe untuk animasi denyut glow */
+@keyframes subtle-glow-pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.3);
+  }
+}
